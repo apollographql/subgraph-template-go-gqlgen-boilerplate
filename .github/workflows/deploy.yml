@@ -1,0 +1,63 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '>=1.19'
+      - name: Build
+        run: go build
+      - name: Test
+        run: go test
+
+  deploy:
+    name: Deploy application
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Deploy
+        run: echo "::warning file=.github/workflows/deploy.yaml,line=31,endLine=32,title=No Deploy step defined::Define your custom workflow for deploying your subgraph here."
+
+  publish_schema:
+    name: Publish new schema to Apollo Studio
+    needs: [ deploy ]
+    env:
+      APOLLO_VCS_COMMIT: ${{ github.event.pull_request.head.sha }}
+      APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+      APOLLO_GRAPH_REF: ${{ secrets.APOLLO_GRAPH_REF }}
+      PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
+      # rename this to a valid subgraph name
+      SUBGRAPH_NAME: foo-bar
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Install Rover
+        run: |
+          curl -sSL https://rover.apollo.dev/nix/latest | sh
+          echo "$HOME/.rover/bin" >> $GITHUB_PATH
+      - name: Publish Schema
+        if: env.APOLLO_KEY != '' &&  env.APOLLO_GRAPH_REF != '' && env.PRODUCTION_URL != ''
+        run: rover subgraph publish ${{ secrets.APOLLO_GRAPH_REF }} --schema graph/schema.graphqls --name ${{ env.SUBGRAPH_NAME }} --routing-url ${{ secrets.PRODUCTION_URL }}
+      - name: APOLLO_KEY is not set
+        if: env.APOLLO_KEY == ''
+        run: echo "::warning file=.github/workflows/deploy.yaml,line=52,col=1,endColumn=1::No Apollo Studio Api Key is set in repository. Set this in the repository secrets under APOLLO_KEY"
+      - name: APOLLO_GRAPH_REF is not set
+        if: env.APOLLO_GRAPH_REF == ''
+        run: echo "::warning file=.github/workflows/deploy.yaml,line=52,col=1,endColumn=1::No Apollo Studio Graph Name is set in repository. Set this in the repository secrets under APOLLO_GRAPH_REF"
+      - name: PRODUCTION_URL is not set
+        if: env.PRODUCTION_URL == ''
+        run: echo "::warning file=.github/workflows/deploy.yaml,line=52,col=1,endColumn=1::No Production URL is set in repository. Set this in the repository secrets under PRODUCTION_URL"

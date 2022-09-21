@@ -1,0 +1,50 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '>=1.19'
+      - name: Build
+        run: go build
+      - name: Test
+        run: go test
+
+  check_schema:
+    name: Check Schema with Apollo Studio
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+      APOLLO_GRAPH_REF: ${{ secrets.APOLLO_GRAPH_REF }}
+      # rename this to a valid subgraph name
+      SUBGRAPH_NAME: foo-bar
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Install Rover
+        run: |
+          curl -sSL https://rover.apollo.dev/nix/latest | sh
+          echo "$HOME/.rover/bin" >> $GITHUB_PATH
+      - name: Schema Check
+        if: env.APOLLO_KEY != '' &&  env.APOLLO_GRAPH_REF != ''
+        run: rover subgraph check ${{ secrets.APOLLO_GRAPH_REF }} --schema graph/schema.graphqls --name ${{ env.SUBGRAPH_NAME }}
+      - name: APOLLO_KEY is not set
+        if: env.APOLLO_KEY == ''
+        run: echo "::warning file=.github/workflows/checks.yaml,line=47,col=1,endColumn=1::No Apollo Studio Api Key is set in repository. Set this in the repository secrets under APOLLO_KEY"
+      - name: APOLLO_GRAPH_REF is not set
+        if: env.APOLLO_GRAPH_REF == ''
+        run: echo "::warning file=.github/workflows/checks.yaml,line=47,col=1,endColumn=1::No Apollo Studio Graph Name is set in repository. Set this in the repository secrets under APOLLO_GRAPH_REF"
