@@ -76,7 +76,17 @@ To start the GraphQL server run following go command.
 go run server.go
 ```
 
-Once the app has started you can explore the example schema by opening the GraphQL Playground endpoint at http://localhost:8080.
+Once the app has started you can explore the example schema by opening the GraphQL Playground endpoint at http://localhost:8080 and begin developing your supergraph with rover dev --url http://localhost:8080/graphql --name my-sugraph.
+
+## Apollo Studio Integration
+
+1. Set these secrets in GitHub Actions:
+    1. APOLLO_KEY: An Apollo Studio API key for the supergraph to enable schema checks and publishing of the subgraph.
+    2. APOLLO_GRAPH_REF: The name of the supergraph in Apollo Studio.
+    3. PRODUCTION_URL: The URL of the deployed subgraph that the supergraph gateway will route to.
+2. Set SUBGRAPH_NAME in .github/workflows/checks.yaml and .github/workflows/deploy.yaml
+3. Remove the if: false lines from .github/workflows/checks.yaml and .github/workflows/deploy.yaml to enable schema checks and publishing.
+4. Write your custom deploy logic in .github/workflows/deploy.yaml.
 
 ## Additional Resources
 
