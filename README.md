@@ -1,6 +1,8 @@
-# Example Federated GQLGEN Subgraph
+# Go `gqlgen` Federated Subgraph
 
-This is an example application template that can be used to create Federated GraphQL subgraph using [gqlgen](https://gqlgen.com/getting-started/).
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/NMBWQ1?referralCode=xsbY2R)
+
+This is an example application template that can be used to create Federated GraphQL subgraph using [gqlgen](https://gqlgen.com/getting-started/). You can use this template from [Rover](https://www.apollographql.com/docs/rover/commands/template/) with `rover template use --template subgraph-go-gqlgen`.
 
 This example application implements following GraphQL schema:
 
