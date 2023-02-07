@@ -5,11 +5,12 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/99designs/gqlgen/graphql/handler"
+	"github.com/go-chi/chi/v5"
+	"github.com/rs/cors"
+
 	"example.com/subgraph-template-go-gqlgen-boilerplate/graph"
 	"example.com/subgraph-template-go-gqlgen-boilerplate/graph/generated"
-	"github.com/99designs/gqlgen/graphql/handler"
-	"github.com/go-chi/chi"
-	"github.com/rs/cors"
 )
 
 const defaultPort = "8080"
