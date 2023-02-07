@@ -59,8 +59,7 @@ go run github.com/99designs/gqlgen generate
 
 ### Code Quality
 
-Example integration test is provided. It starts up the the example server and executes `foo` query against it. Run
-`test` command to execute provided tests.
+Example integration test is provided. It starts up the example server and executes `foo` query against it. Run `test` command to execute provided tests.
 
 ```shell
 go test
@@ -78,7 +77,7 @@ To start the GraphQL server run following go command.
 go run server.go
 ```
 
-Once the app has started you can explore the example schema by opening the GraphQL Playground endpoint at http://localhost:8080 and begin developing your supergraph with rover dev --url http://localhost:8080/graphql --name my-sugraph.
+Once the app has started you can explore the example schema with [Apollo Studio Sandbox](https://www.apollographql.com/docs/graphos/explorer/sandbox) and begin developing your supergraph with `rover dev --url http://localhost:8080 --name my-subgraph`.
 
 ## Apollo Studio Integration
 
