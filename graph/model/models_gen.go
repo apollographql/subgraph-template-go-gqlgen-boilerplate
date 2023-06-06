@@ -4,7 +4,7 @@ package model
 
 type Foo struct {
 	ID   string  `json:"id"`
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 func (Foo) IsEntity() {}
