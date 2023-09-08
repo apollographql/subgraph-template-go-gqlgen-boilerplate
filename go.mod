@@ -3,7 +3,7 @@ module example.com/subgraph-template-go-gqlgen-boilerplate
 go 1.19
 
 require (
-	github.com/99designs/gqlgen v0.17.36
+	github.com/99designs/gqlgen v0.17.37
 	github.com/go-chi/chi/v5 v5.0.10
 	github.com/rs/cors v1.10.0
 	github.com/stretchr/testify v1.8.4
@@ -13,6 +13,7 @@ require (
 require (
 	github.com/agnivade/levenshtein v1.1.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/hashicorp/golang-lru/v2 v2.0.3 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
