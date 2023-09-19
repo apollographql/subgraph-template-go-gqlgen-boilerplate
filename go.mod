@@ -3,11 +3,11 @@ module example.com/subgraph-template-go-gqlgen-boilerplate
 go 1.19
 
 require (
-	github.com/99designs/gqlgen v0.17.37
+	github.com/99designs/gqlgen v0.17.38
 	github.com/go-chi/chi/v5 v5.0.10
 	github.com/rs/cors v1.10.0
 	github.com/stretchr/testify v1.8.4
-	github.com/vektah/gqlparser/v2 v2.5.9
+	github.com/vektah/gqlparser/v2 v2.5.10
 )
 
 require (
