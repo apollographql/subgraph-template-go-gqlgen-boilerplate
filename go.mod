@@ -7,7 +7,7 @@ require (
 	github.com/go-chi/chi/v5 v5.0.12
 	github.com/rs/cors v1.11.0
 	github.com/stretchr/testify v1.9.0
-	github.com/vektah/gqlparser/v2 v2.5.14
+	github.com/vektah/gqlparser/v2 v2.5.16
 )
 
 require (
