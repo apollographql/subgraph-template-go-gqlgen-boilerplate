@@ -1,9 +1,11 @@
 module example.com/subgraph-template-go-gqlgen-boilerplate
 
-go 1.19
+go 1.22.5
+
+toolchain go1.23.1
 
 require (
-	github.com/99designs/gqlgen v0.17.49
+	github.com/99designs/gqlgen v0.17.50
 	github.com/go-chi/chi/v5 v5.0.13
 	github.com/rs/cors v1.11.1
 	github.com/stretchr/testify v1.9.0
