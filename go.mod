@@ -5,7 +5,7 @@ go 1.22.5
 toolchain go1.23.4
 
 require (
-	github.com/99designs/gqlgen v0.17.58
+	github.com/99designs/gqlgen v0.17.59
 	github.com/go-chi/chi/v5 v5.1.0
 	github.com/rs/cors v1.11.1
 	github.com/stretchr/testify v1.10.0
