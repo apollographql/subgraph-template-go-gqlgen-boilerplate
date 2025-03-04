@@ -2,7 +2,7 @@ module example.com/subgraph-template-go-gqlgen-boilerplate
 
 go 1.22.12
 
-toolchain go1.24.0
+toolchain go1.24.1
 
 require (
 	github.com/99designs/gqlgen v0.17.66
