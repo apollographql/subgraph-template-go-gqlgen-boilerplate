@@ -37,7 +37,7 @@ func main() {
 
 	router.Handle("/", srv)
 
-	log.Printf("Explore with \"https://studio.apollographql.com/sandbox/explorer?endpoint=http://localhost:" + port + "\"")
+	log.Printf("Explore with \"https://studio.apollographql.com/sandbox/explorer?endpoint=http://localhost:%s\"", port)
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }
 

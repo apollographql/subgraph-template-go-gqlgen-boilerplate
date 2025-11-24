@@ -8,3 +8,6 @@ type Foo struct {
 }
 
 func (Foo) IsEntity() {}
+
+type Query struct {
+}
