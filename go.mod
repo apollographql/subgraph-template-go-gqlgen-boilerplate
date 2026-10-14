@@ -6,7 +6,7 @@ toolchain go1.27.2
 
 require (
 	github.com/99designs/gqlgen v0.17.95
-	github.com/go-chi/chi/v5 v5.4.0
+	github.com/go-chi/chi/v5 v5.5.0
 	github.com/rs/cors v1.11.1
 	github.com/stretchr/testify v1.12.1
 	github.com/vektah/gqlparser/v2 v2.5.62
